@@ -1,8 +1,8 @@
 
 
-import 'package:cookgram/features/home/persentation/widgets/homeBody.dart';
-import 'package:cookgram/features/home/persentation/views/searchView.dart';
-import 'package:cookgram/features/recipesMaker/persentation/views/addRecipeView.dart';
+import 'package:cookgram/features/home/persentation/widgets/home_body.dart';
+import 'package:cookgram/features/home/persentation/views/search_screen.dart';
+import 'package:cookgram/features/recipes_maker/persentation/views/add_recipe_screen.dart';
 import 'package:flutter/material.dart';
 
 class Homeview extends StatefulWidget {

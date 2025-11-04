@@ -1,4 +1,4 @@
-import 'package:cookgram/features/home/persentation/widgets/CuisinesItem.dart';
+import 'package:cookgram/features/home/persentation/widgets/cuisines_item.dart';
 import 'package:flutter/material.dart';
 
 class CuisinesGrid extends StatelessWidget {

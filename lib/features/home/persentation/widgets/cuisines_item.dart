@@ -1,4 +1,4 @@
-import 'package:cookgram/core/utils/app_colors.dart';
+import 'package:cookgram/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CuisinesCostumItem extends StatelessWidget {
