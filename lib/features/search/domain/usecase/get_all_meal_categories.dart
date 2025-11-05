@@ -7,6 +7,7 @@ import 'package:dartz/dartz.dart';
 class GetAllMealCategories implements UseCase<List<MealEntity>, NoParams> {
   final RecipeRepository recipeRepository;
 
+
   GetAllMealCategories(this.recipeRepository);
 
   @override
