@@ -1,6 +1,6 @@
 import 'package:cookgram/core/utils/app_colors.dart';
 
-import 'package:cookgram/features/home/persentation/widgets/recommed_list.dart';
+import 'package:cookgram/features/search/persentation/widgets/recommed_list.dart';
 import 'package:flutter/material.dart';
 
 class Searchview extends StatelessWidget {

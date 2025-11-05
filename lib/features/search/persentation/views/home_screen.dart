@@ -1,7 +1,7 @@
 
 
-import 'package:cookgram/features/home/persentation/widgets/home_body.dart';
-import 'package:cookgram/features/home/persentation/views/search_screen.dart';
+import 'package:cookgram/features/search/persentation/widgets/home_body.dart';
+import 'package:cookgram/features/search/persentation/views/search_screen.dart';
 import 'package:cookgram/features/recipes_maker/persentation/views/add_recipe_screen.dart';
 import 'package:flutter/material.dart';
 

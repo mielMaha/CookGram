@@ -1,7 +1,7 @@
 import 'package:cookgram/core/theme/app_colors.dart';
 import 'package:cookgram/core/utils/tetList.dart';
-import 'package:cookgram/features/home/persentation/widgets/cuisines_grid.dart';
-import 'package:cookgram/features/home/persentation/widgets/top_card.dart';
+import 'package:cookgram/features/search/persentation/widgets/cuisines_grid.dart';
+import 'package:cookgram/features/search/persentation/widgets/top_card.dart';
 
 import 'package:flutter/material.dart';
 
