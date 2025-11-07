@@ -8,7 +8,9 @@ class GetMealByArea implements UseCase<List<MealEntity>, String> {
   final RecipeRepository recipeRepository;
 
   GetMealByArea(this.recipeRepository);
+
   Future<Either<Failure, List<MealEntity>>> call(params) {
+
     return recipeRepository.getMealByArea(params);
   }
 }
