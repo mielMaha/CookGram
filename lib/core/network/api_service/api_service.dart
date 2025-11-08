@@ -1,19 +1,20 @@
 import 'package:cookgram/core/network/api_service/api_service_interface.dart';
 import 'package:cookgram/core/network/dio_service.dart';
-import 'package:cookgram/core/network/endpoints/api_endpoints.dart';
-import 'package:dio/dio.dart';
+
+import 'package:cookgram/core/network/exception/custom_exception.dart';
 
 class ApiService implements ApiInterface {
-  DioService _dioService;
+  final DioService _dioService;
 
-  ApiService(DioService dioService) : _dioService = dioService;
+  ApiService(this._dioService);
+
   @override
-  Future<Map<String, dynamic>> getData({
-    required ApiEndpointsEnum endpoint,
+  Future<T> getData<T>({
+    required String endpoint,
     String? param,
     Map<String, dynamic>? queryParams,
+    required T Function(Map<String, dynamic> json) converter,
   }) async {
-    Map<String, dynamic> json;
     try {
       final response = await _dioService.getData(
         endpoint: endpoint,
@@ -21,22 +22,38 @@ class ApiService implements ApiInterface {
         queryParams: queryParams,
       );
 
-      json = response.data;
+      if (response.data == null) {
+        throw Exception('Response data is null.');
+      }
 
-      return json;
-    } on DioException catch (e) {
-      print('Dio Error: ${e.message}');
-      rethrow;
+      return converter(response.data);
+    } catch (error) {
+      final exceptionType = ApiErrorHandler.getExceptionType(error);
+      final message = ApiErrorHandler.getErrorMessage(exceptionType);
+      throw Exception(message);
     }
   }
 
   @override
-  Future<List<Type>> getDataList({
-    required ApiEndpointsEnum endpoint,
+  Future<List<T>> getDataList<T>({
+    required String endpoint,
     String? param,
     Map<String, dynamic>? queryParams,
-  }) {
-    // TODO: implement getDataList
-    throw UnimplementedError();
+    required T Function(Map<String, dynamic> json) converter,
+  }) async {
+    try {
+      final response = await _dioService.getData(
+        endpoint: endpoint,
+        param: param,
+        queryParams: queryParams,
+      );
+
+      final List<dynamic> dataList = response.data['meals'] ?? [];
+      return dataList.map((item) => converter(item as Map<String, dynamic>)).toList();
+    } catch (error) {
+      final exceptionType = ApiErrorHandler.getExceptionType(error);
+      final message = ApiErrorHandler.getErrorMessage(exceptionType);
+      throw Exception(message);
+    }
   }
 }

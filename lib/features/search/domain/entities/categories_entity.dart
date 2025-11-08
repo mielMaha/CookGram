@@ -1,5 +1,6 @@
 class CategoriesEntity {
  
+ 
   final String name;
   final String imageUrl;
 

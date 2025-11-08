@@ -1,17 +1,20 @@
-import 'package:cookgram/core/network/endpoints/api_endpoints.dart';
 
-abstract interface class ApiInterface{
+abstract interface class ApiInterface {
   const ApiInterface();
 
-  Future<Map<String, dynamic>> getData({
-    required ApiEndpointsEnum endpoint,
+  Future<T> getData<T>({
+    required String endpoint,
     String? param,
     Map<String, dynamic>? queryParams,
+    required T Function(Map<String, dynamic> responseBody) converter
   });
-  Future<List<Type>> getDataList({
-    required ApiEndpointsEnum endpoint,
+
+
+  Future<List<T>> getDataList<T>({
+    required String endpoint,
     String? param,
     Map<String, dynamic>? queryParams,
+        required T Function(Map<String, dynamic> responseBody) converter
+
   });
-   
 }
