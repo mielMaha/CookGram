@@ -40,6 +40,7 @@ class ApiService implements ApiInterface {
     String? param,
     Map<String, dynamic>? queryParams,
     required T Function(Map<String, dynamic> json) converter,
+    String? key='meals',
   }) async {
     try {
       final response = await _dioService.getData(
@@ -48,7 +49,7 @@ class ApiService implements ApiInterface {
         queryParams: queryParams,
       );
 
-      final List<dynamic> dataList = response.data['meals'] ?? [];
+      final List<dynamic> dataList = response.data[key] ?? [];
       return dataList.map((item) => converter(item as Map<String, dynamic>)).toList();
     } catch (error) {
       final exceptionType = ApiErrorHandler.getExceptionType(error);

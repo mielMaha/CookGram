@@ -35,6 +35,7 @@ class RecipeRemoteDataSourceImpl implements RecipeRemoteDataSource {
     return await _apiService.getDataList<IngredientEntity>(
       endpoint: ApiEndpoints().getpath(ApiEndpointsEnum.getIngredientsList),
       converter: IngredientModel.fromJson,
+     
     );
   }
 
@@ -44,6 +45,7 @@ class RecipeRemoteDataSourceImpl implements RecipeRemoteDataSource {
     return await _apiService.getDataList<CategoriesEntity>(
       endpoint: ApiEndpoints().getpath(ApiEndpointsEnum.getCategoriesList),
       converter: CategoriesModel.fromJson,
+      key: 'categories',
     );
   }
 

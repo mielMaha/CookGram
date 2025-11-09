@@ -11,15 +11,23 @@ class RecipeRepositoryImpl implements RecipeRepository {
 
   RecipeRepositoryImpl({ required this.remoteDataSource});
   @override
-  Future<Either<Failure, List<IngredientEntity>>> getALLMealIngredientsList() {
-    // TODO: implement getALLMealIngredientsList
-    throw UnimplementedError();
+  Future<Either<Failure, List<IngredientEntity>>> getALLMealIngredientsList()async {
+    try {
+       final meals =await remoteDataSource.getALLMealIngredientsList();
+    return Right(meals);
+    } catch (e) {
+      return Left(Failure(e.toString()));
+    }
   }
 
   @override
-  Future<Either<Failure, List<CategoriesEntity>>> getAllMealCategoriesList() {
-    // TODO: implement getAllMealCategoriesList
-    throw UnimplementedError();
+  Future<Either<Failure, List<CategoriesEntity>>> getAllMealCategoriesList() async{
+    try {
+       final meals =await remoteDataSource.getAllMealCategoriesList();
+    return Right(meals);
+    } catch (e) {
+      return Left(Failure(e.toString()));
+    }
   }
 
   @override

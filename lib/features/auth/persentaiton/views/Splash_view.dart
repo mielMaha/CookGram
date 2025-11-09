@@ -1,6 +1,6 @@
 
 import 'package:cookgram/core/theme/app_colors.dart';
-import 'package:cookgram/features/search/persentation/views/home_screen.dart';
+import 'package:cookgram/features/search/persentation/views/home_view.dart';
 import 'package:flutter/material.dart';
 
 class SplashView extends StatefulWidget {
