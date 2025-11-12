@@ -8,6 +8,12 @@ class CuisinesCostumItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final imageUrl = cuisine['thumbnail']?.isNotEmpty == true
+        ? cuisine['thumbnail']!
+        : 'https://via.placeholder.com/60'; 
+
+    final name = cuisine['name'] ?? 'No name';
+
     return Container(
       width: 106,
       height: 150,
@@ -18,7 +24,6 @@ class CuisinesCostumItem extends StatelessWidget {
           BoxShadow(
             color: AppColors.brownAppC.withOpacity(0.4),
             spreadRadius: 1,
-
             blurRadius: 3,
             offset: Offset(2, 3),
           ),
@@ -28,13 +33,12 @@ class CuisinesCostumItem extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Image.network(
-            cuisine['image']!,
+            imageUrl,
             fit: BoxFit.cover,
             width: 60,
-            // height: 69,
           ),
           Text(
-            cuisine['name']!,
+            name,
             style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400),
           ),
         ],

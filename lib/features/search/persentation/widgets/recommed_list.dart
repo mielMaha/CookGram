@@ -25,14 +25,14 @@ class RecommedList extends StatelessWidget {
                   padding: const EdgeInsets.all(2.0),
                   child: ClipOval(
                     child: Image.network(
-                      cuisines[index]['image']!,
+                      testList[index]['image']!,
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
               ),
               Text(
-                cuisines[index]['name']!,
+                testList[index]['name']!,
                 style: TextStyle(
                   color: AppColors.blackAppC,
                   fontSize: 10,
@@ -43,7 +43,7 @@ class RecommedList extends StatelessWidget {
           ),
         );
       },
-      itemCount: cuisines.length,
+      itemCount: testList.length,
     );
   }
 }

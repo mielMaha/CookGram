@@ -8,7 +8,9 @@ import 'package:cookgram/features/search/domain/entities/meal_entity.dart';
 class SearchMealsCubit extends Cubit<MealState> {
   final RecipeRepository repository;
 
-  SearchMealsCubit(this.repository) : super(MealInitial());
+  SearchMealsCubit(this.repository) : super(MealInitial()) {
+   
+  }
 
   Future<void> searchByName(String name) async {
     emit(MealLoading());
@@ -18,6 +20,7 @@ class SearchMealsCubit extends Cubit<MealState> {
       (meals) => emit(MealLoaded(meals)),
     );
   }
+
 
   Future<void> searchByCategory(String category) async {
     emit(MealLoading());
@@ -36,6 +39,7 @@ class SearchMealsCubit extends Cubit<MealState> {
       (meals) => emit(MealLoaded(meals)),
     );
   }
+  
 
   Future<void> searchByArea(String area) async {
     emit(MealLoading());
@@ -45,4 +49,41 @@ class SearchMealsCubit extends Cubit<MealState> {
       (meals) => emit(MealLoaded(meals)),
     );
   }
+
+Future<void> searchPopular() async {
+    emit(MealLoading());
+    final result = await repository.getPopularRecipes();
+    result.fold(
+      (failure) => emit(MealError(failure)),
+      (meals) => emit(MealLoaded(meals)),
+    );
+  }
+  Future<void> searchDetails(String id) async {
+    emit(MealLoading());
+    final result = await repository.getMealDetails(id);
+    result.fold(
+      (failure) => emit(MealError(failure)),
+      (meals) => emit(MealLoaded([meals])),
+    );
+  }
+Future<void> searchCategories() async {
+ 
+  emit(MealLoading());
+
+  final result = await repository.getAllMealCategoriesList();
+
+  result.fold(
+    (failure) {
+      
+      emit(MealError(failure));
+    },
+    (categories) {
+     
+      emit(CategoriesLoaded(categories));
+    },
+  );
+}
+
+
+
 }

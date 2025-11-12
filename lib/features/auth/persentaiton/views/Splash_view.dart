@@ -1,7 +1,8 @@
-
 import 'package:cookgram/core/theme/app_colors.dart';
-import 'package:cookgram/features/search/persentation/views/home_view.dart';
+import 'package:cookgram/features/search/persentation/views/home_screen.dart';
+import 'package:cookgram/features/search/persentation/cubits/meal_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -12,18 +13,22 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   @override
-  @override
   void initState() {
-    Future.delayed(Duration(seconds: 2), () {
+    super.initState();
+    Future.delayed(const Duration(seconds: 2), () {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => Homeview()),
+        MaterialPageRoute(
+          builder: (context) => BlocProvider.value(
+            value: BlocProvider.of<SearchMealsCubit>(context),
+            child:  Homeview(),
+          ),
+        ),
       );
     });
-    // TODO: implement initState
-    super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.yellowAppC,
@@ -31,8 +36,8 @@ class _SplashViewState extends State<SplashView> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(width: double.infinity),
-          Image(image: AssetImage('assets/logo.png'), height: 132, width: 150),
+          const SizedBox(width: double.infinity),
+          const Image(image: AssetImage('assets/logo.png'), height: 132, width: 150),
           Container(
             width: 172,
             height: 5,

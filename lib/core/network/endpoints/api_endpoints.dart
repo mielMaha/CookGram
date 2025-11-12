@@ -1,5 +1,5 @@
 class ApiEndpoints {
-  static const String baseUrl = 'www.themealdb.com/api/json/v1/1/';
+  static const String baseUrl = 'https://www.themealdb.com/api/json/v1/1/';
   String getpath(ApiEndpointsEnum apiEndpointsEnum) {
     switch (apiEndpointsEnum) {
       case ApiEndpointsEnum.getCategoriesList:
