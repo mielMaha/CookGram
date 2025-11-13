@@ -53,25 +53,26 @@ class RecipeRemoteDataSourceImpl implements RecipeRemoteDataSource {
   Future<List<MealEntity>> getMealByArea(String area) async {
     return await _apiService.getDataList<MealEntity>(
       endpoint: ApiEndpoints().getpath(ApiEndpointsEnum.getMealByArea),
-      param: area,
+      queryParams: {'a': area},
       converter: MealModel.fromJson,
     );
   }
 
   @override
-  Future<List<MealEntity>> getMealByCategory(String category) async {
-    return await _apiService.getDataList<MealEntity>(
-      endpoint: ApiEndpoints().getpath(ApiEndpointsEnum.getMealByCategory),
-      param: category,
-      converter: MealModel.fromJson,
-    );
-  }
+ Future<List<MealEntity>> getMealByCategory(String category) async {
+  return await _apiService.getDataList<MealEntity>(
+    endpoint: ApiEndpoints().getpath(ApiEndpointsEnum.getMealByCategory),
+    queryParams: {'c': category},
+    converter: MealModel.fromJson,
+    key: 'meals',
+  );
+}
 
   @override
   Future<List<MealEntity>> getMealByIngredient(String ingredient) async {
     return await _apiService.getDataList<MealEntity>(
       endpoint: ApiEndpoints().getpath(ApiEndpointsEnum.getMealByIngredient),
-      param: ingredient,
+     queryParams: {'i': ingredient},
       converter:MealModel.fromJson,
     );
   }
@@ -80,7 +81,7 @@ class RecipeRemoteDataSourceImpl implements RecipeRemoteDataSource {
   Future<List<MealEntity>> getMealByName(String name) async {
     return await _apiService.getDataList<MealEntity>(
       endpoint: ApiEndpoints().getpath(ApiEndpointsEnum.getMealByName),
-      param: name,
+      queryParams: {'s': name},
       converter: MealModel.fromJson,
     );
   }
@@ -89,7 +90,7 @@ class RecipeRemoteDataSourceImpl implements RecipeRemoteDataSource {
   Future<MealEntity> getMealDetails(String id) async {
     return await _apiService.getData<MealEntity>(
       endpoint: ApiEndpoints().getpath(ApiEndpointsEnum.getMealDetails),
-      param: id,
+      queryParams: {'i': id},
       converter:MealModel.fromJson,
     );
   }
@@ -99,6 +100,7 @@ class RecipeRemoteDataSourceImpl implements RecipeRemoteDataSource {
     return await _apiService.getDataList<MealEntity>(
       endpoint: ApiEndpoints().getpath(ApiEndpointsEnum.getPopular),
       converter: MealModel.fromJson,
+
     );
   }
 }

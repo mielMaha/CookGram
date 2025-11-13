@@ -5,17 +5,17 @@ class ApiEndpoints {
       case ApiEndpointsEnum.getCategoriesList:
         return 'categories.php';
       case ApiEndpointsEnum.getPopular:
-        return 'search.php?f=a';
+        return 'search.php?f';
       case ApiEndpointsEnum.getMealByName:
-        return 'search.php?s=';
+        return 'search.php?';
       case ApiEndpointsEnum.getMealByCategory:
-        return 'filter.php?c=';
+        return 'filter.php?';
       case ApiEndpointsEnum.getMealByIngredient:
-        return 'list.php?i=';
+        return 'list.php?';
       case ApiEndpointsEnum.getMealByArea:
-        return 'filter.php?a=';
+        return 'filter.php?';
       case ApiEndpointsEnum.getMealDetails:
-        return 'lookup.php?i=';
+        return 'lookup.php?';
       case ApiEndpointsEnum.getIngredientsList:
         return 'list.php?i=list';
     }

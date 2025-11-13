@@ -1,4 +1,4 @@
-import 'package:cookgram/features/search/persentation/widgets/cuisines_grid_wrapper.dart';
+import 'package:cookgram/features/search/persentation/widgets/catgories_grid.dart';
 import 'package:cookgram/features/search/persentation/widgets/top_card.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +22,7 @@ class Homebody extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: const CuisinesGridWrapper(),
+          child:  CatgoriesGrid(),
         ),
       ],
     );

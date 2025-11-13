@@ -22,14 +22,18 @@ class SearchMealsCubit extends Cubit<MealState> {
   }
 
 
-  Future<void> searchByCategory(String category) async {
-    emit(MealLoading());
-    final result = await repository.getMealByCategory(category);
-    result.fold(
-      (failure) => emit(MealError(failure)),
-      (meals) => emit(MealLoaded(meals)),
-    );
-  }
+Future<void> searchByCategory(String category) async {
+  emit(MealLoading());
+  final result = await repository.getMealByCategory(category);
+  result.fold(
+    (failure) => emit(MealError(failure)),
+    (meals) {
+      print('Meals for $category: $meals'); // ✅ تتأكدي هنا إنها جابت بيانات
+      emit(MealLoaded(meals));
+    },
+  );
+}
+
 
   Future<void> searchByIngredient(String ingredient) async {
     emit(MealLoading());

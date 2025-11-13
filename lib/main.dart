@@ -9,25 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-
   final dioService = DioService();
   final apiService = ApiService(dioService);
   final remoteDataSource = RecipeRemoteDataSourceImpl(apiService: apiService);
   final repository = RecipeRepositoryImpl(remoteDataSource: remoteDataSource);
 
   runApp(
-    MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) {
-           
-            final cubit = SearchMealsCubit(repository)..searchCategories();
-           
-            return cubit;
-          },
-        ),
-      ],
+    BlocProvider(
+      create: (_) => SearchMealsCubit(repository)..searchCategories(),
       child: const CookGram(),
     ),
   );
