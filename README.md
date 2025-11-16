@@ -1,4 +1,13 @@
-# CookGram Flutter App
+# CookGram
+
+
+
+## Screenshots
+
+![App Screenshot](https://github.com/mielMaha/CookGram/blob/main/assets/Purple%20Pink%20Gradient%20Mobile%20Application%20Presentation.png?raw=true)
+
+
+
 > A Flutter app for searching and adding recipes with Clean Architecture and API integration.
 
 ## Table of Contents
