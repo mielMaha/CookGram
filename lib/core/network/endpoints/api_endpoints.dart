@@ -5,7 +5,7 @@ class ApiEndpoints {
       case ApiEndpointsEnum.getCategoriesList:
         return 'categories.php';
       case ApiEndpointsEnum.getPopular:
-        return 'search.php?f';
+        return 'search.php?';
       case ApiEndpointsEnum.getMealByName:
         return 'search.php?';
       case ApiEndpointsEnum.getMealByCategory:

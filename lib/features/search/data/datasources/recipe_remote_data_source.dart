@@ -30,7 +30,6 @@ class RecipeRemoteDataSourceImpl implements RecipeRemoteDataSource {
   final ApiService _apiService;
   RecipeRemoteDataSourceImpl({required ApiService apiService})
     : _apiService = apiService;
-    //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   Future<List<IngredientEntity>> getALLMealIngredientsList() async {
     return await _apiService.getDataList<IngredientEntity>(
       endpoint: ApiEndpoints().getpath(ApiEndpointsEnum.getIngredientsList),
@@ -40,7 +39,6 @@ class RecipeRemoteDataSourceImpl implements RecipeRemoteDataSource {
   }
 
   @override
-  //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   Future<List<CategoriesEntity>> getAllMealCategoriesList() async {
     return await _apiService.getDataList<CategoriesEntity>(
       endpoint: ApiEndpoints().getpath(ApiEndpointsEnum.getCategoriesList),
@@ -87,19 +85,33 @@ class RecipeRemoteDataSourceImpl implements RecipeRemoteDataSource {
   }
 
   @override
-  Future<MealEntity> getMealDetails(String id) async {
-    return await _apiService.getData<MealEntity>(
-      endpoint: ApiEndpoints().getpath(ApiEndpointsEnum.getMealDetails),
-      queryParams: {'i': id},
-      converter:MealModel.fromJson,
-    );
-  }
+@override
+@override
+Future<MealEntity> getMealDetails(String id) async {
+  return await _apiService.getData<MealEntity>(
+    endpoint: ApiEndpoints().getpath(ApiEndpointsEnum.getMealDetails),
+    queryParams: {'i': id},
+    converter: (json) {
+      final mealJson = json['meals'][0];
+     
+      return MealModel.fromJson(mealJson);
+    },
+  );
+}
+
+
+
+
 
   @override
   Future<List<MealEntity>> getPopularRecipes() async {
     return await _apiService.getDataList<MealEntity>(
       endpoint: ApiEndpoints().getpath(ApiEndpointsEnum.getPopular),
       converter: MealModel.fromJson,
+      key: 'meals',
+      queryParams: {
+        'f': 'q',
+      },
 
     );
   }

@@ -28,7 +28,7 @@ Future<void> searchByCategory(String category) async {
   result.fold(
     (failure) => emit(MealError(failure)),
     (meals) {
-      print('Meals for $category: $meals'); // ✅ تتأكدي هنا إنها جابت بيانات
+      print('Meals for $category: $meals');
       emit(MealLoaded(meals));
     },
   );
@@ -59,17 +59,26 @@ Future<void> searchPopular() async {
     final result = await repository.getPopularRecipes();
     result.fold(
       (failure) => emit(MealError(failure)),
-      (meals) => emit(MealLoaded(meals)),
+      (meals) {
+        print('Meals for $meals');
+        emit(MealLoaded(meals));
+      },
     );
   }
-  Future<void> searchDetails(String id) async {
-    emit(MealLoading());
-    final result = await repository.getMealDetails(id);
-    result.fold(
-      (failure) => emit(MealError(failure)),
-      (meals) => emit(MealLoaded([meals])),
-    );
-  }
+Future<void> searchDetails(String id) async {
+  emit(MealLoading());
+  final result = await repository.getMealDetails(id);
+result.fold(
+  (failure) => emit(MealError(failure)),
+  (meal) {
+   
+    emit(MealLoaded([meal]));
+  },
+);
+}
+
+
+
 Future<void> searchCategories() async {
  
   emit(MealLoading());

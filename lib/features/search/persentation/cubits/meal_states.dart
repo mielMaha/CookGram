@@ -23,3 +23,7 @@ class CategoriesLoaded extends MealState {
   final List<CategoriesEntity> categories;
   CategoriesLoaded(this.categories);
 }
+class MealLoadedSingle extends MealState {
+  final MealEntity meal;
+  MealLoadedSingle(this.meal);
+}

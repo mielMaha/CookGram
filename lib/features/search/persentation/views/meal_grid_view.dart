@@ -1,18 +1,24 @@
 import 'package:cookgram/features/search/persentation/cubits/meal_cubit.dart';
+import 'package:cookgram/features/search/persentation/cubits/meal_states.dart';
+import 'package:cookgram/features/search/persentation/views/meal_details_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MealGridScreen extends StatelessWidget {
   final List meals;
+  
 
   const MealGridScreen({super.key, required this.meals});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Meals'),backgroundColor: Colors.white,),
+      appBar: AppBar(
+        title: const Text('Meals'),
+        backgroundColor: Colors.white,
+      ),
       body: WillPopScope(
-       onWillPop: () async {
+        onWillPop: () async {
      
       context.read<SearchMealsCubit>().searchCategories();
       return true;
@@ -28,47 +34,18 @@ class MealGridScreen extends StatelessWidget {
           itemCount: meals.length,
           itemBuilder: (context, index) {
             final meal = meals[index];
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => MealDetailScreen(meal: meal),
-                  ),
-                );
+            return BlocListener<SearchMealsCubit, MealState>(
+              listener: (context, state) {
+                if (state is MealLoaded) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const MealDetailsView(),
+                    ),
+                  );
+                }
               },
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black26,
-                      blurRadius: 4,
-                      offset: const Offset(2, 3),
-                    ),
-                  ],
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.network(
-                      meal.thumbnail,
-                      width: 100,
-                      height: 100,
-                      fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) =>
-                          const Icon(Icons.image_not_supported),
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      meal.name,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                  ],
-                ),
-              ),
+              child: _MealItem(meal: meal),
             );
           },
         ),
@@ -77,24 +54,49 @@ class MealGridScreen extends StatelessWidget {
   }
 }
 
-class MealDetailScreen extends StatelessWidget {
-  final dynamic meal;
+class _MealItem extends StatelessWidget {
+  const _MealItem({
+    super.key,
+    required this.meal,
+  });
 
-  const MealDetailScreen({super.key, required this.meal});
+  final dynamic meal;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(meal.name)),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
+    return GestureDetector(
+      onTap: () {
+    
+        context.read<SearchMealsCubit>().searchDetails(meal.id);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 4,
+              offset: Offset(2, 3),
+            ),
+          ],
+        ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(meal.thumbnail),
-            const SizedBox(height: 16),
+            Image.network(
+              meal.thumbnail,
+              width: 100,
+              height: 100,
+              fit: BoxFit.cover,
+              errorBuilder: (_, __, ___) =>
+                  const Icon(Icons.image_not_supported),
+            ),
+            const SizedBox(height: 8),
             Text(
-              meal.instructions,
-              style: const TextStyle(fontSize: 16),
+              meal.name,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 14),
             ),
           ],
         ),

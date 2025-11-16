@@ -1,4 +1,5 @@
 import 'package:cookgram/core/theme/app_colors.dart';
+
 import 'package:flutter/material.dart';
 
 class TopCard extends StatelessWidget {
@@ -64,24 +65,7 @@ class TopCard extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 20.0, right: 17.0),
-          child: TextButton.icon(
-            iconAlignment: IconAlignment.end,
-            style: TextButton.styleFrom(
-              minimumSize: Size(180, 30),
-              foregroundColor: AppColors.blackAppC,
-              backgroundColor: AppColors.whiteAppC.withOpacity(0.5),
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 2),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
-              ),
-            ),
-            onPressed: () {},
-            label: Text('Explore Recipes'),
-            icon: Icon(Icons.arrow_forward),
-          ),
-        ),
+     
       ],
     );
   }
