@@ -1,4 +1,5 @@
 import 'package:cookgram/core/error/failures.dart';
+import 'package:cookgram/features/search/domain/entities/Ingredient_entite.dart';
 import 'package:cookgram/features/search/domain/entities/categories_entity.dart';
 import 'package:cookgram/features/search/domain/entities/meal_entity.dart';
 
@@ -26,4 +27,8 @@ class CategoriesLoaded extends MealState {
 class MealLoadedSingle extends MealState {
   final MealEntity meal;
   MealLoadedSingle(this.meal);
+}
+class IngredientsLoaded extends MealState {
+  final List<IngredientEntity> ingredients;
+  IngredientsLoaded(this.ingredients);
 }

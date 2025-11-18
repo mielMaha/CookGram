@@ -97,6 +97,19 @@ Future<void> searchCategories() async {
   );
 }
 
+Future<void > getALLMealIngredientsList()async{
+
+  emit(MealLoading());
+  final result = await repository.getALLMealIngredientsList();
+result.fold(
+  (failure) => emit(MealError(failure)),
+  (ingredients) {
+   
+    emit(IngredientsLoaded(ingredients));
+  },
+);
+}
+
 
 
 }

@@ -16,7 +16,7 @@ void main() {
 
   runApp(
     BlocProvider(
-      create: (_) => SearchMealsCubit(repository)..searchCategories(),
+      create: (_) => SearchMealsCubit(repository)..searchCategories()..getALLMealIngredientsList()..searchByIngredient('Dessert'),
       child: const CookGram(),
     ),
   );
