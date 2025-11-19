@@ -10,4 +10,14 @@ class RecipeEntity {
     required this.steps,
     required this.imageUrl,
   });
+
+ Map<String, dynamic> toJson() => {
+        
+        'title': title,
+        'ingredients': ingredients,
+        'steps': steps,
+        'image_url': imageUrl,
+        
+      };
+
 }

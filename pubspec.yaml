@@ -42,7 +42,7 @@ dependencies:
   flutter_bloc: ^9.1.1
   flutter_riverpod: ^3.0.3
   url_launcher: ^6.1.11
-  supabase_flutter: ^1.5.0
+  supabase_flutter: ^2.10.3
   image_picker: ^0.8.7+4
   path: ^1.8.2
   uuid: ^3.0.7
