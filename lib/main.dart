@@ -3,6 +3,8 @@ import 'package:cookgram/core/network/api_service/supabase_manager.dart';
 import 'package:cookgram/core/network/dio_service.dart';
 import 'package:cookgram/core/theme/app_theme.dart';
 import 'package:cookgram/features/auth/persentaiton/views/splash_view.dart';
+import 'package:cookgram/features/recipes/data/datasources/recipes_maker_remote_data_source.dart';
+import 'package:cookgram/features/recipes/persentation/cubit/recipe_cubit.dart';
 import 'package:cookgram/features/search/data/datasources/recipe_remote_data_source.dart';
 import 'package:cookgram/features/search/data/repositories/recipe_repository_impl.dart';
 import 'package:cookgram/features/search/persentation/cubits/meal_cubit.dart';
@@ -15,10 +17,23 @@ void main() async{
   final apiService = ApiService(dioService);
   final remoteDataSource = RecipeRemoteDataSourceImpl(apiService: apiService);
   final repository = RecipeRepositoryImpl(remoteDataSource: remoteDataSource);
+  SupabaseManager supabaseManager = SupabaseManager();
+ RecipesMakerRemoteDataSource recipesMakerRemoteDataSource = RecipesMakerRemoteDataSource(supabaseManager: supabaseManager);
 
   runApp(
-    BlocProvider(
-      create: (_) => SearchMealsCubit(repository)..searchCategories()..getALLMealIngredientsList()..searchByIngredient('Dessert'),
+    MultiBlocProvider(
+      providers: [
+             
+        BlocProvider(
+               create: (_) => SearchMealsCubit(repository)..searchCategories(),
+
+        ),
+        
+        BlocProvider(
+               create: (_) => RecipeCubit(remoteDataSource: recipesMakerRemoteDataSource, supabaseManager: supabaseManager),
+
+        ),
+      ],
       child: const CookGram(),
     ),
   );

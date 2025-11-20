@@ -1,8 +1,9 @@
 
 
+import 'package:cookgram/features/recipes/persentation/views/community_view.dart';
 import 'package:cookgram/features/search/persentation/widgets/home_body.dart';
 import 'package:cookgram/features/search/persentation/views/search_view.dart';
-import 'package:cookgram/features/recipes/persentation/views/add_recipe_screen.dart';
+import 'package:cookgram/features/recipes/persentation/views/add_recipe_view.dart';
 import 'package:flutter/material.dart';
 
 class Homeview extends StatefulWidget {
@@ -17,7 +18,7 @@ class _HomeviewState extends State<Homeview> {
     Homebody(),
     Searchview(),
     AddRecipeScreen(),
-    Icon(Icons.favorite),
+   CommunityView(),
   ];
   void _onItemTapped(int index) {
     setState(() {

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cookgram/core/network/api_service/supabase_manager.dart';
@@ -7,23 +8,21 @@ import 'package:cookgram/features/recipes/persentation/cubit/recipe_states.dart'
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RecipeCubit extends Cubit<RecipeStates> {
- final RecipesMakerRemoteDataSource remoteDataSource;
+  final RecipesMakerRemoteDataSource remoteDataSource;
   final SupabaseManager supabaseManager;
 
-  RecipeCubit({
-    required this.remoteDataSource,
-    required this.supabaseManager,
-  }) : super(RecipeInitial());
-  Future<void> getAllRecipes() async {
+  RecipeCubit({required this.remoteDataSource, required this.supabaseManager})
+    : super(RecipeInitial());
+   Future<void> getAllRecipes() async {
     emit(RecipeLoading());
-
     final result = await remoteDataSource.getAllRecipes();
-
     result.fold(
       (failure) => emit(RecipeError(failure.message)),
       (recipes) => emit(RecipeLoaded(recipes)),
     );
   }
+
+
 
   Future<void> addRecipe(RecipeEntity recipe) async {
     emit(RecipeLoading());
@@ -35,20 +34,21 @@ class RecipeCubit extends Cubit<RecipeStates> {
       (_) => emit(RecipeAddedSuccess()),
     );
   }
+
+  String? imageUrl;
   Future<void> uploadImage(File imageFile) async {
-  emit(ImageUpLoading());
+    emit(ImageUpLoading());
 
-  try {
-    final imagePath = await supabaseManager.uploadImage(imageFile);
+    try {
+      final imagePath = await supabaseManager.uploadImage(imageFile);
 
-    emit(ImageUpLoadedComplete());
+      emit(ImageUpLoadedComplete());
 
-    final imageUrl = await supabaseManager.downloadImage(imagePath);
+      imageUrl = await supabaseManager.downloadImage(imagePath);
 
-    emit(ImageDownLoaded(imageUrl));
-  } catch (e) {
-    emit(ImageError(e.toString()));
+      emit(ImageDownLoaded(imageUrl!));
+    } catch (e) {
+      emit(ImageError(e.toString()));
+    }
   }
-}
-
 }
